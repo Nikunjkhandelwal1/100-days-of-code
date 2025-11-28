@@ -1,0 +1,36 @@
+#include <stdio.h>
+
+int main() {
+    int n;
+    scanf("%d", &n);
+
+    int nums[n], answer[n];
+
+    for(int i = 0; i < n; i++) {
+        scanf("%d", &nums[i]);
+    }
+
+    // Compute prefix products
+    int prefix = 1;
+    for(int i = 0; i < n; i++) {
+        answer[i] = prefix;
+        prefix *= nums[i];
+    }
+
+    // Compute suffix products and multiply with prefix result
+    int suffix = 1;
+    for(int i = n - 1; i >= 0; i--) {
+        answer[i] *= suffix;
+        suffix *= nums[i];
+    }
+
+    // Output answer array
+    for(int i = 0; i < n; i++) {
+        if (i == 0)
+            printf("%d", answer[i]);
+        else
+            printf(" %d", answer[i]);
+    }
+
+    return 0;
+}
